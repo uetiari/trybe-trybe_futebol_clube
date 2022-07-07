@@ -1,6 +1,6 @@
 FROM node:16-alpine
 
-WORKDIR /app/frontend
+WORKDIR /app-frontend
 
 EXPOSE 3000
 

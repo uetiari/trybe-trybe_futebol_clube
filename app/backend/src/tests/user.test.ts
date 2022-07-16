@@ -31,4 +31,11 @@ describe('01 - Verifica User-Login caso de sucesso', () => {
   });
 });
 
-
+describe('01 - Verifica User-Login caso de erro', () => {
+  it('Verifica rota /login e retorno de mensagem quando estiver algo faltando', async () => {
+    const response = await chai
+      .request(app).post('/login');
+    expect(response.status).to.be.equal(400);
+    expect(response.body).to.be.eql({ message: 'All fields must be filled' });
+  });
+});

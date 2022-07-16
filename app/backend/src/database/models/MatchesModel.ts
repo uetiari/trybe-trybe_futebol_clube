@@ -18,7 +18,7 @@ Matches.init({
     autoIncrement: true,
     primaryKey: true,
   },
-  home_team: {
+  homeTeam: {
     type: DataTypes.NUMBER,
     allowNull: false, 
     references: {
@@ -26,10 +26,10 @@ Matches.init({
       key: 'id'
     }
   },
-  home_team_goals: {
+  homeTeamGoals: {
     type: DataTypes.NUMBER,
   },
-  away_team: {
+  awayTeam: {
     type: DataTypes.NUMBER,
     allowNull: false, 
       references: {
@@ -37,10 +37,10 @@ Matches.init({
       key: 'id'
     }
 },
-  away_team_goals: {
+  awayTeamGoals: {
     type: DataTypes.NUMBER,
   },
-  in_progress: {
+  inProgress: {
     type: DataTypes.BOOLEAN,
   },
 }, {

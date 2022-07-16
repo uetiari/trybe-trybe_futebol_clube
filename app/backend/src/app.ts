@@ -1,5 +1,6 @@
 import * as express from 'express';
 import LoginRoute from './database/routes/loginRoute';
+import TeamsRoute from './database/routes/teamsRoute';
 
 class App {
   public app: express.Express;
@@ -24,6 +25,7 @@ class App {
     this.app.use(accessControl);
 
     this.app.use('/login', LoginRoute);
+    this.app.use('/teams', TeamsRoute);
     
 
   }

@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import Service from '../services/userService';
+import userService from '../services/userService';
 
 export default class Controller {
-  private service = new Service(); 
+  private service = new userService(); 
 
   login = async (req: Request, res: Response, next: NextFunction) => {
 

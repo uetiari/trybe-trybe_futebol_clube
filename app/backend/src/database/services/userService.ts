@@ -1,10 +1,10 @@
-import Model from '../models/UsersModel';
+import usersModel from '../models/UsersModel';
 import { ILogin } from '../interfaces/index';
 import * as BCrypt from 'bcryptjs';
 import generateToken, { decoder } from '../helpers/jwtGenerate';
 
-export default class Service {
-  private model = Model;
+export default class userService {
+  private model = usersModel;
   
   login = async (email: string, password: string) => {
     const user = await this.model.findOne({ where: { email }});

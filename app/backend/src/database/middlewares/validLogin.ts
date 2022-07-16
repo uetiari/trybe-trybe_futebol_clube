@@ -19,7 +19,7 @@ export const validPassword = (req:Request, res:Response, next:NextFunction) => {
   const { password } = req.body;
 
   if (password === undefined || password === '') {
-    return res.status(400).json({ "message": "All fields must be filled" });
+    return res.status(400).json({ message: "All fields must be filled" });
   }
 
   if (password.length < 6) {

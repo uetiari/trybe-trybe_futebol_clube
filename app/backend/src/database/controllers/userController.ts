@@ -12,8 +12,7 @@ export default class Controller {
       
       return res.status(200).json(token);
     } catch (error) {
-      // const e:Error = error as Error
-
+      
       res.status(401).json({ message: "Incorrect email or password" });
     }
   }
@@ -26,8 +25,7 @@ export default class Controller {
       
       return res.status(200).json(role);
     } catch (error) {
-      // const e:Error = error as Error
-
+      
       res.status(401).json({ message: "Deu ruim :-(" });
     }
   }

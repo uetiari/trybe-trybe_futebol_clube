@@ -27,6 +27,7 @@ class App {
     this.app.use('/login', LoginRoute);
     this.app.use('/teams', TeamsRoute);
     
+    
 
   }
 

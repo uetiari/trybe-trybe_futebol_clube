@@ -12,4 +12,14 @@ export default class teamsController {
       res.status(401).json({ message: 'Deu ruim :-( '});
     }
   }
+
+  teamById = async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    try {
+      const teamById = await this.service.teamById(id);
+      return res.status(200).json(teamById);
+    } catch (error) {
+      res.status(401).json({ message: 'Deu ruim :-( '});
+    }
+  }
 }

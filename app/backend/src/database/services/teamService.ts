@@ -8,4 +8,11 @@ export default class teamsService {
     
     return teams;
   }
+
+  teamById = async (id: string) => {
+    const teamById = await this.model.findByPk(id );
+    if(!teamById) throw new Error('Team not found!');
+
+    return teamById;
+  }
 }

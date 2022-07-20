@@ -9,7 +9,7 @@ import UsersModel from '../database/models/UsersModel';
 chai.use(chaiHttp);
 const { expect } = chai;
 
-describe('01 - Verifica User-Login caso de sucesso', () => {
+describe('01 - Verifica User-Login ', () => {
   before(async () => {
     sinon
       .stub(UsersModel, 'findOne')
@@ -21,7 +21,7 @@ describe('01 - Verifica User-Login caso de sucesso', () => {
   })
 
   it('Verifica rota /login/validate e retorno obj com Role', async () => {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1Nzk5OTIxNSwiZXhwIjoxNjU4MDE3MjE1fQ.3NRvpN-z39_edjXHJf83xHUYA8b3u8RpChWJIcjME7U';
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1ODM1NDE1NiwiZXhwIjoxNjU4MzcyMTU2fQ.TVLuqPHNiF014mQRTb0tXSDR5Okcklc-FqlemZ3U7gA";
 
     const response = await chai
       .request(app).get('/login/validate')
@@ -29,9 +29,18 @@ describe('01 - Verifica User-Login caso de sucesso', () => {
     expect(response.status).to.be.equal(200);
     expect(response.body).to.be.eql({ role: 'admin' });
   });
+
+  it('Verifica rota /login/validate e retorno com erro', async () => {
+    
+    const response = await chai
+      .request(app).get('/login/validate');
+    expect(response.status).to.be.equal(400);
+    expect(response.body).to.be.equal({ message: 'Authorization required' });
+  });
 });
 
-describe('01 - Verifica User-Login caso de erro', () => {
+
+describe('02 - Verifica User-Login caso de erro', () => {
   it('Verifica rota /login e retorno de mensagem quando estiver algo faltando', async () => {
     const response = await chai
       .request(app).post('/login');

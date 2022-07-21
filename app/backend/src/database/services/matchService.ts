@@ -9,4 +9,9 @@ export default class matchService {
     return match;
   }
 
+  create = async (data:object) => {
+    const created = await this.model.create({ ...data, inProgress: true });
+    
+    return created;
+  }
 }

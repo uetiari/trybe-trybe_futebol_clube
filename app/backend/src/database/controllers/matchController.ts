@@ -37,6 +37,7 @@ export default class matchController {
   inProgressUp = async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
     const upBody = req.body;
+    
     try {
       const inProgressUp = await this.service.inProgressUp(id, upBody);
 

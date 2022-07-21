@@ -10,10 +10,16 @@ export default class matchService {
   }
 
   create = async (data:object) => {
-    const created = await this.model.create({ ...data, inProgress: true });
-    
-    return created;
+    try {
+      const created = await this.model.create({ ...data, inProgress: true });
+      
+      return created;
+      
+    } catch (error) {
+      throw new Error("There is no team with such id!")
+    }
   }
+  // Ref.: https://github.com/tryber/sd-017-trybe-futebol-clube/pull/56
 
   update = async (id:string) => {
     const updatedMatch = await this.model.update({ inProgress: false }, { where: { id }});

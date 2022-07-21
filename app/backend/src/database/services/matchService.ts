@@ -14,4 +14,9 @@ export default class matchService {
     
     return created;
   }
+
+  update = async (id:string) => {
+    const updatedMatch = await this.model.update({ inProgress: false }, { where: { id }});
+    return { message: "Finished" };
+  }
 }

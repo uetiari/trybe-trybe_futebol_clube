@@ -33,4 +33,16 @@ export default class matchController {
       res.status(401).json({ message: 'Deu ruim :-( '});
     }
   };
+
+  inProgressUp = async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const upBody = req.body;
+    try {
+      const inProgressUp = await this.service.inProgressUp(id, upBody);
+
+      return res.status(200).json();
+    } catch (error) {
+      res.status(401).json({ message: 'Deu ruim :-( '});
+    }
+  };
 };

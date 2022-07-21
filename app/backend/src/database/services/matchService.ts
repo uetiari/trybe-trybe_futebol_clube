@@ -22,6 +22,11 @@ export default class matchService {
 
   update = async (id:string) => {
     const updatedMatch = await this.model.update({ inProgress: false }, { where: { id }});
-    return { message: "Finished" };
+    return { message: "Updated" };
+  }
+
+  inProgressUp = async (id:string, body:object) => {
+    const inProgressUp = await this.model.update(body, { where: { id }});
+    return { message: "Match in Progress updated" };
   }
 }

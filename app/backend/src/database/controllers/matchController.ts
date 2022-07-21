@@ -41,7 +41,7 @@ export default class matchController {
     try {
       const inProgressUp = await this.service.inProgressUp(id, upBody);
 
-      return res.status(200).json();
+      return res.status(200).json(inProgressUp);
     } catch (error) {
       res.status(401).json({ message: 'Deu ruim :-( '});
     }

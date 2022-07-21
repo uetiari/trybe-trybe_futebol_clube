@@ -14,9 +14,8 @@ export default class matchService {
       const created = await this.model.create({ ...data, inProgress: true });
       
       return created;
-      
     } catch (error) {
-      throw new Error("There is no team with such id!")
+      throw new Error("There is no team with such id")
     }
   }
   // Ref.: https://github.com/tryber/sd-017-trybe-futebol-clube/pull/56

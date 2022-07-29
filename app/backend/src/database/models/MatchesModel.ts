@@ -4,7 +4,7 @@ import Teams from './TeamsModel';
 
 export default class Matches extends Model {
   public id: number;
-  public homeTeam: string;
+  public homeTeam: number;
   public homeTeamGoals: number;
   public awayTeam: number;
   public awayTeamGoals: number;
@@ -50,7 +50,7 @@ Matches.init({
   timestamps: false,
 });
 
-Matches.belongsTo(Teams, { foreignKey: 'home_team', as: 'teamHome' })
-Matches.belongsTo(Teams, { foreignKey: 'away_team', as: 'teamAway' })
-Teams.hasMany(Matches, { foreignKey: 'home_team', as: 'homeMatches'})
-Teams.hasMany(Matches, { foreignKey: 'away_team', as: 'awayMatches'});
+Matches.belongsTo(Teams, { foreignKey: 'homeTeam', as: 'teamHome' })
+Matches.belongsTo(Teams, { foreignKey: 'awayTeam', as: 'teamAway' })
+Teams.hasMany(Matches, { foreignKey: 'homeTeam', as: 'homeMatches'})
+Teams.hasMany(Matches, { foreignKey: 'awayTeam', as: 'awayMatches'});

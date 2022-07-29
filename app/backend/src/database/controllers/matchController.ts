@@ -21,7 +21,7 @@ export default class matchController {
     } catch (error) {
       res.status(404).json({ message: "There is no team with such id!"});
     }
-  };
+  }; 
   
   update = async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;

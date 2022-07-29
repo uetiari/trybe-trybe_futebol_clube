@@ -1,11 +1,8 @@
 import { Router } from "express";
-// import UserController from '../controllers/userController';
-// import { validEmail, validPassword } from '../middlewares/validLogin';
+import learderboardController from "../controllers/leaderboardController";
 
 const router = Router();
-// const userController = new UserController();
 
-router.post('/');
-// router.get('/');
+router.get('/home', learderboardController.getHome);
 
 export default router;

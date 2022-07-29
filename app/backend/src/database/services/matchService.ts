@@ -1,7 +1,9 @@
 import matchesModel from '../models/MatchesModel';
+import teamsModel from '../models/TeamsModel';
 
 export default class matchService {
   private model = matchesModel;
+  private modelTeams = teamsModel;
 
   matches = async () => {
     const match = await this.model.findAll({ include: ['teamHome', 'teamAway']});
@@ -12,12 +14,13 @@ export default class matchService {
   create = async (data:object) => {
     try {
       const created = await this.model.create({ ...data, inProgress: true });
-      
       return created;
+      
     } catch (error) {
       throw new Error("There is no team with such id")
     }
   }
+  
   // Ref.: https://github.com/tryber/sd-017-trybe-futebol-clube/pull/56
 
   update = async (id:string) => {

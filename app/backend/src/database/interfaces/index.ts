@@ -5,5 +5,9 @@ export interface IUser {
   role: string
 }
 
-
 export type ILogin = Omit<IUser, 'username' | 'role'>;
+
+export interface IMatchesGoals {
+  goalsFavor: number,
+  goalsOwn: number,
+}

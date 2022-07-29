@@ -47,5 +47,30 @@ export default class LearderboardService {
     
       return 0;
     });
+  };
+
+  public static getAway = async () => {
+    const teamsAwayData = await this.getTeams();
+    const matchesData = await this.getMatches();
+    const awayGames: TeamMatchesResults[] = [];
+
+    teamsAwayData.forEach((teamAway) => {
+      const filterMatches = matchesData
+        .filter(
+          (filterMatch) => filterMatch.inProgress === false
+          && filterMatch.awayTeam === teamAway.id,
+        );
+      const mapMatches = filterMatches.map((mapMatch) => ({ goalsOwn: mapMatch.homeTeamGoals,
+          goalsFavor: mapMatch.awayTeamGoals,
+        }));
+
+      const teamResults = new TeamMatchesResults(teamAway.teamName, mapMatches);
+      awayGames.push(teamResults);
+      this.compareTeams(awayGames)
+    });
+
+    return { code: 200, leaderboard: awayGames };
   }
+
+
 }

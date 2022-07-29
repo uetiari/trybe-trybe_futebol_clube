@@ -9,5 +9,15 @@ export default class learderboardController {
     return res.status(200).json(teams.leaderboard);
   } catch (e) {
     next(e);
-  }}
+  }};
+
+  static getAway = async (_req:Request, res: Response, next:NextFunction) => {
+    try {
+      const teams = await LearderboardService.getAway();
+      
+      return res.status(200).json(teams.leaderboard);
+    } catch (e) {
+      next(e);
+    }
+  };
 };

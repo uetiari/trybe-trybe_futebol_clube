@@ -12,19 +12,26 @@ const { expect } = chai;
 describe('Leaderboard ', () => {
   before(async () => {
     sinon
-      .stub(UsersModel, 'findOne')
-      .resolves({ email: "admin@admin.com", password: "secret_admin" } as UsersModel);
+      .stub(UsersModel, 'findAll')
+      .resolves([{ }] as any);
   });
 
   after(() => {
-    (UsersModel.findOne as sinon.SinonStub).restore();
+    (UsersModel.findAll as sinon.SinonStub).restore();
   })
 
-  it('Verifica rota /login/validate e retorno obj com Role', async () => {
+  it('Verifica rota /leaderboard/home e retorno obj com sucesso', async () => {
     
     const response = await chai
-      .request(app).get('/leaderboard');
+      .request(app).get('/leaderboard/home').send();
     expect(response.status).to.be.equal(200);
+    
   });
 
+  it('Verifica a rota /leaderboard/away ', async () => {    
+    const response = await chai
+      .request(app).get('/leaderboard/away').send();
+    expect(response.status).to.be.equal(200);
+  
+  });
 });

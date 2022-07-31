@@ -13,26 +13,7 @@ describe('01 - Verifica Matches caso de sucesso', () => {
   before(async () => {
     sinon
       .stub(MatchesModel, 'findAll')
-      .resolves([
-        { 
-          "id": 1,
-          "homeTeam": 16,
-          "homeTeamGoals": 1,
-          "awayTeam": 8,
-          "awayTeamGoals": 1,
-          "inProgress": false,
-            "home_team": 16,
-            "away_team": 8,
-            "teamHome": {
-              "id": 16,
-              "teamName": "São Paulo"
-            },
-            "teamAway": {
-              "id": 8,
-              "teamName": "Grêmio"
-            }
-          }
-      ] as any);
+      .resolves([{ }] as any);
   });
 
   after(() => {
@@ -45,33 +26,48 @@ describe('01 - Verifica Matches caso de sucesso', () => {
       .request(app).get('/matches')
       .set('teamHome', 'teamAway');
     expect(response.status).to.be.equal(200);
+  
   });
 
-  it('Verifica se retorna um Array com objs dentro', async () => {
+  it('Deve retornar um status 200 quando buscado por id', async () => {
+    const response = await chai.request(app).get('/teams/2')
+        expect(response.status).to.be.equal(200)
+  });
+  
+  });
 
-    const response = await chai
-    .request(app).get('/matches');
-    expect(response.body).to.deep.equal(
-      [
-        { 
-          "id": 1,
-          "homeTeam": 16,
-          "homeTeamGoals": 1,
-          "awayTeam": 8,
-          "awayTeamGoals": 1,
-          "inProgress": false,
-            "home_team": 16,
-            "away_team": 8,
-            "teamHome": {
-              "id": 16,
-              "teamName": "São Paulo"
-            },
-            "teamAway": {
-              "id": 8,
-              "teamName": "Grêmio"
-            }
-          }
-      ] 
-    );
-  })
+
+
+describe('02 - Verifica criação de nova partida', () => {
+  const matchMock = {
+    id: 49,
+    homeTeam: 16,
+    awayTeam: 8,
+    homeTeamGoals: 2,
+    awayTeamGoals: 2,
+    inProgress: true
+    } as MatchesModel;
+
+  before(() => {
+    return sinon.stub(MatchesModel, 'create').resolves(matchMock)
+  });
+  after(() => {
+    (MatchesModel.create as sinon.SinonStub).restore();
+  });
+  
+    it('Testa se cria a partida com sucesso com token válido', async () => {
+      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1OTI5NzAzMSwiZXhwIjoxNjU5MzE1MDMxfQ.L6LVB7YxjXnBWvI-60yQ05xdSnAo7aVz51AqtAUP3tw"
+
+    const response = await chai.request(app).post('/matches').set('Authorization', token).send(
+      { 
+        "id": 49,
+        "homeTeam": 16,
+        "awayTeam": 8,
+        "homeTeamGoals": 2,
+        "awayTeamGoals": 2,
+      });
+
+      expect(response.status).to.be.equal(201);
+      expect(response.body).to.be.eql(matchMock);
+    });
 });

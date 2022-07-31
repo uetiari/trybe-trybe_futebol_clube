@@ -21,7 +21,7 @@ describe('01 - Verifica User-Login ', () => {
   })
 
   it('Verifica rota /login/validate e retorno obj com Role', async () => {
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1ODM1NDE1NiwiZXhwIjoxNjU4MzcyMTU2fQ.TVLuqPHNiF014mQRTb0tXSDR5Okcklc-FqlemZ3U7gA";
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY1OTI5NjA5OCwiZXhwIjoxNjU5MzE0MDk4fQ.k3IRhjuc8ulzX4tPkvErkJq4oBvD9B14udCiEWCdc2c";
 
     const response = await chai
       .request(app).get('/login/validate')
@@ -33,9 +33,10 @@ describe('01 - Verifica User-Login ', () => {
   it('Verifica rota /login/validate e retorno com erro', async () => {
     
     const response = await chai
-      .request(app).get('/login/validate');
-    expect(response.status).to.be.equal(400);
-    expect(response.body).to.be.equal({ message: 'Authorization required' });
+      .request(app).get('/login/validate')
+      .set('Authorization', '');
+    expect(response.status).to.be.equal(401);
+    expect(response.body).to.be.eql({ message: 'Authorization required' });
   });
 });
 
